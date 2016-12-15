@@ -27,6 +27,7 @@ dependencies {
     })
     compile project(':joketell')
     compile project(':jokeandroid')
+    //compile project(':JokeGCE')
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'com.google.android.gms:play-services-ads:10.0.1'
     compile 'com.google.code.findbugs:jsr305:2.0.1'

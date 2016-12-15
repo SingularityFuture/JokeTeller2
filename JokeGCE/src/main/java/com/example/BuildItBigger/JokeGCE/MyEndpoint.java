@@ -9,6 +9,7 @@ package com.example.BuildItBigger.JokeGCE;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.example.JokeTell;
 
 import javax.inject.Named;
 
@@ -32,7 +33,9 @@ public class MyEndpoint {
     @ApiMethod(name = "sayHi")
     public MyBean sayHi(@Named("name") String name) {
         MyBean response = new MyBean();
-        response.setData("Hi, " + name);
+        JokeTell jokeSource = new JokeTell();
+        String joke = jokeSource.getJoke();
+        response.setData(joke);
 
         return response;
     }
