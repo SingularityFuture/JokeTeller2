@@ -1,24 +1,15 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
-import com.example.builditbigger.jokegce.myApi.MyApi;
 import com.example.jokeandroid.JokeActivity;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.extensions.android.json.AndroidJsonFactory;
-import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
-import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
-
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    String result = "";//Holds result
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +50,44 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void launchJokeActivity(View view) {
+/*    public void launchJokeActivity(View view) {
 //        JokeTell jokeSource = new JokeTell();
 //        String joke = jokeSource.getJoke();
 
         new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, "Manfred"));
 
+    }*/
+
+    public void launchJokeActivity(View view){
+
+        final JokeEndPointsAsyncTask asyncTask = (JokeEndPointsAsyncTask) new JokeEndPointsAsyncTask(new JokeEndPointsAsyncTask.AsyncResponse() {
+
+            @Override
+            public void processResponse(String output) {
+                //Log.d(YOLOPAD, RESPONSE_FROM_SERVER_IS + output);
+
+                result = output;
+                //    Log.d("Yolopad","Output is " + result);
+
+            }
+
+
+        }).execute();
+
+
+        //  Log.d("Yolopad","Joke is " +result);
+        if(! result.isEmpty()){
+            findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+            Intent intent = new Intent(this, JokeActivity.class);
+            intent.putExtra(JokeActivity.JOKE_KEY, result);
+            startActivity(intent);
+        }
+        else
+        {
+            //    Log.d("Yolopad","Joke is " +result);
+            findViewById(R.id.progress_bar).setVisibility(View.GONE);
+            Toast.makeText(MainActivity.this, "Failed to get data", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -77,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+ /*   public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
         //private static MyApi myApiService = null;
         private MyApi myApiService = null;
         private Context context;
@@ -93,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                         // options for running against local devappserver
                         // - 10.0.2.2 is localhost's IP address in Android emulator
                         // - turn off compression when running against local devappserver
-                        .setRootUrl("http://38.88.187.35/_ah/api/")
+                        .setRootUrl("http://10.0.2.2:8080/_ah/api/")
                         .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                             @Override
                             public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
@@ -124,5 +148,5 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
+*/
 }
