@@ -18,6 +18,31 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        paid {
+            //applicationId 'com.udacity.gradle.builditbigger.paid'
+            applicationIdSuffix '.paid'
+            resValue "string", "app_name", "Joke Paid"
+        }
+
+        free {
+            // applicationId 'com.udacity.gradle.builditbigger.free'
+            applicationIdSuffix '.free'
+            resValue "string", "app_name", "Joke Free"
+        }
+    }
+
+    sourceSets {
+        free {
+            manifest.srcFile 'src/free/AndroidManifest.xml'
+            java.srcDirs = ['src/free/java']
+        }
+        paid {
+            java.srcDirs = ['src/paid/java', 'src/paid/java/']
+            manifest.srcFile 'src/paid/AndroidManifest.xml'
+        }
+    }
 }
 
 dependencies {
@@ -29,7 +54,7 @@ dependencies {
     compile project(':jokeandroid')
     //compile project(':JokeGCE')
     compile 'com.android.support:appcompat-v7:25.0.1'
-    compile 'com.google.android.gms:play-services-ads:10.0.1'
+    freeCompile 'com.google.android.gms:play-services-ads:10.0.1'
     compile 'com.google.code.findbugs:jsr305:2.0.1'
     compile project(path: ':JokeGCE', configuration: 'android-endpoints')
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
