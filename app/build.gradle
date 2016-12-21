@@ -41,7 +41,7 @@ android {
             resValue "string", "app_name", "Joke Paid"
         }
     }
-    sourceSets {
+/*    sourceSets {
         free {
             manifest.srcFile 'src/free/AndroidManifest.xml'
             java.srcDirs = ['src/free/java', 'src/free/java/']
@@ -50,7 +50,7 @@ android {
             java.srcDirs = ['src/paid/java', 'src/paid/java/']
             manifest.srcFile 'src/paid/AndroidManifest.xml'
         }
-    }
+    }*/
 }
 
 dependencies {

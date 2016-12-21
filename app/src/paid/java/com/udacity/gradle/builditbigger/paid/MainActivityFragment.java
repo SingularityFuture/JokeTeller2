@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.udacity.gradle.builditbigger.R;
 
 /**
- * Created by jatin on 10/17/16.
+ * Created by Michael on 12/21/16.
  */
 
 public class MainActivityFragment extends Fragment {
