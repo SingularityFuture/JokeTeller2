@@ -2,4 +2,6 @@
     <string name="app_name">JokeAndroid</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="missing_joke">Please provide a joke for me to tell!</string>
+    <string name="joke_key"></string>
+    <string name="joke_value">y dog used to chase people on a bike a lot. It got so bad, finally I had to take his bike away.</string>
 </resources>

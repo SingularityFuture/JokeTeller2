@@ -1,5 +1,6 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.builditbigger.jokegce.myApi.MyApi;
@@ -22,9 +23,11 @@ public class JokeEndPointsAsyncTask extends AsyncTask<Void,Void,String> {
     }
 
     public AsyncResponse delegate = null;
+    public Context c = null;
 
-    public JokeEndPointsAsyncTask(AsyncResponse delegate){
+    public JokeEndPointsAsyncTask(AsyncResponse delegate, Context c){
         this.delegate = delegate;
+        this.c = c;
     }
     @Override
     protected String doInBackground(Void... params) {
@@ -49,7 +52,8 @@ public class JokeEndPointsAsyncTask extends AsyncTask<Void,Void,String> {
 
 
         try {
-            return myApiService.sayHi("Hello").execute().getData();
+            String string = c.getString(R.string.default_text);
+            return myApiService.sayHi(string).execute().getData();
             //return myApiService.getJoke().execute().getData();
         } catch (IOException e) {
             return e.getMessage();

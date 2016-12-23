@@ -1,5 +1,8 @@
 package com.udacity.gradle.builditbigger.test;
 
+import android.content.Context;
+
+import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnitRunner;
 
 import com.udacity.gradle.builditbigger.JokeEndPointsAsyncTask;
@@ -21,6 +24,7 @@ public class MainActivityAndroidTest extends AndroidJUnitRunner {
     public void testJokeRetrieval()
     {
         final CountDownLatch signal = new CountDownLatch(1);
+        Context context = InstrumentationRegistry.getContext();
 
         JokeEndPointsAsyncTask jokeEndPointsAsyncTask = (JokeEndPointsAsyncTask) new JokeEndPointsAsyncTask(new JokeEndPointsAsyncTask.AsyncResponse() {
             @Override
@@ -29,7 +33,7 @@ public class MainActivityAndroidTest extends AndroidJUnitRunner {
                 assertNotSame(output,"");
                 signal.countDown();
             }
-        }).execute();
+        },context).execute();
 
         try {
             signal.await();

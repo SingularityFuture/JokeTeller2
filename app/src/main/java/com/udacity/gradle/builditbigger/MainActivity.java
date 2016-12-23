@@ -9,15 +9,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.jokeandroid.JokeActivity;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends AppCompatActivity {
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
     String result = "";//Holds result
 
     @Override
@@ -72,12 +66,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-        }).execute();
+        }, this).execute();
 
 
         //  Log.d("Yolopad","Joke is " +result);
         if(! result.isEmpty()){
-            findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+            //findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
             Intent intent = new Intent(this, JokeActivity.class);
             intent.putExtra(JokeActivity.JOKE_KEY, result);
             startActivity(intent);
@@ -85,8 +79,9 @@ public class MainActivity extends AppCompatActivity {
         else
         {
             //    Log.d("Yolopad","Joke is " +result);
-            findViewById(R.id.progress_bar).setVisibility(View.GONE);
-            Toast.makeText(MainActivity.this, "Failed to get data", Toast.LENGTH_SHORT).show();
+            //findViewById(R.id.progress_bar).setVisibility(View.GONE);
+            String string = this.getString(R.string.fail_text);
+            Toast.makeText(MainActivity.this, string, Toast.LENGTH_SHORT).show();
         }
     }
 

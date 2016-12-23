@@ -6,10 +6,10 @@
 
 package com.example.BuildItBigger.JokeGCE;
 
+import com.example.JokeTell;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
-import com.example.JokeTell;
 
 import javax.inject.Named;
 
