@@ -1,11 +1,14 @@
 package com.udacity.gradle.builditbigger.test;
 
 import android.content.Context;
-
 import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
 import android.support.test.runner.AndroidJUnitRunner;
 
 import com.udacity.gradle.builditbigger.JokeEndPointsAsyncTask;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -14,13 +17,13 @@ import static junit.framework.Assert.assertNotSame;
 import static junit.framework.Assert.fail;
 
 
-/**
+ /**
  * Created by Michael on 12/17/2016.
  */
 
-
-
+@RunWith(AndroidJUnit4.class)
 public class MainActivityAndroidTest extends AndroidJUnitRunner {
+    @Test
     public void testJokeRetrieval()
     {
         final CountDownLatch signal = new CountDownLatch(1);
